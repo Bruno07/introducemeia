@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Exceptions\IAException;
 use App\Models\Topic;
 use App\Requests\PromptRequest;
 use App\Responses\PromptResponse;
@@ -22,19 +23,23 @@ class IAService
      */
     public function generateContent(PromptRequest $request)
     {   
-        $topics = $this->getHistoryTopics($request);
-        
-        $topicModel = $this->topicRepository->findByKey($request->getTopic());
-        
-        $prompt = $this->makePrompt($topicModel);
-
-        $text = $this->getLLM(new GeminiService, $prompt);
-
-        $response = new PromptResponse;
-        $response->setText($text);
-        $response->setOptions($topics);
-
-        return $response;
+        try {
+            $topics = $this->getHistoryTopics($request);
+            
+            $topicModel = $this->topicRepository->findByKey($request->getTopic());
+            
+            $prompt = $this->makePrompt($topicModel);
+    
+            $text = $this->getLLM(new GeminiService, $prompt);
+    
+            $response = new PromptResponse;
+            $response->setText($text);
+            $response->setOptions($topics);
+    
+            return $response;
+        } catch (IAException $e) {
+            throw new IAException($e->getMessage());
+        } 
     }
 
     /**

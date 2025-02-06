@@ -40,9 +40,13 @@ services:
       - introducemeia_app
 
   introducemeia_redis:
+    container_name: introducemeia_redis
     image: 'redis:latest'
+    restart: always
     ports:
-      - "6378:6379"
+      - "6379:6379"
+    networks:
+      - introducemeia_app
     
 networks:
   introducemeia_app:
