@@ -12,6 +12,6 @@ class Topic extends Model
      * @var string[]
      */
     protected $fillable = [
-        'key', 'title', 'description',
+        'key', 'title', 'description', 'is_hidden'
     ];
 }

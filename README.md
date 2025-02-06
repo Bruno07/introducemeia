@@ -69,13 +69,15 @@ This will start the following containers:
 docker compose exec introducemeia_app bash
 ```
 
-4. Configure queue
+4. Run commands
 
-* composer install;
-* php artisan migrate;
+```bash
+composer install
+php artisan migrate
+php artisan db:seed TopicSeeder
+```
 
 Check the environment variables to make sure everything is correct before running migrate
-
 
 After these steps, you need to create or update a task and you should be notified.
 
