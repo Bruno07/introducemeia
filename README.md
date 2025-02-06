@@ -33,7 +33,7 @@ To install the Introducemeia API, follow these steps:
 
 1. Clone this repository to your local machine:
 ```bash
-git clone git@github.com:Bruno07/introducemeia-api.git
+git clone git@github.com:Bruno07/introducemeia.git
 ```
 # Usage
 
